@@ -6,6 +6,7 @@ import { DataListModule } from 'src/components/data-list/data-list.module';
 import { DataFilterModule } from 'src/components/data-filter/data-filter.module';
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'src/components/infinite-scroll/infinite-scroll.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { InfiniteScrollModule } from 'src/components/infinite-scroll/infinite-sc
     HttpClientModule,
     DataListModule,
     DataFilterModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

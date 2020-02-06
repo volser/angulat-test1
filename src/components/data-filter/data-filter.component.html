@@ -1,1 +1,42 @@
-<p>data-filter works!</p>
+<form>
+  <mat-form-field>
+    <input matInput placeholder="Name" [value]="data?.name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select>
+      <mat-option [value]="CharacterStatus.Alive">{{
+        CharacterStatus.Alive
+      }}</mat-option>
+      <mat-option [value]="CharacterStatus.Dead">{{
+        CharacterStatus.Dead
+      }}</mat-option>
+      <mat-option [value]="CharacterStatus.unknown">{{
+        CharacterStatus.unknown
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Species" [value]="data?.species" />
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Type" [value]="data?.type" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Gender</mat-label>
+    <mat-select>
+      <mat-option [value]="CharacterGender.Male">{{
+        CharacterGender.Male
+      }}</mat-option>
+      <mat-option [value]="CharacterGender.Female">{{
+        CharacterGender.Female
+      }}</mat-option>
+      <mat-option [value]="CharacterGender.Genderless">{{
+        CharacterGender.Genderless
+      }}</mat-option>
+      <mat-option [value]="CharacterGender.unknown">{{
+        CharacterGender.unknown
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

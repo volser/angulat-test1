@@ -1,0 +1,9 @@
+$data-filter: '.data-filter';
+
+#{$data-filter} {
+  display: flex;
+
+  .mat-form-field {
+      margin: 10px;
+  }
+}
