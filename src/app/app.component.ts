@@ -1,18 +1,27 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, of } from 'rxjs';
 import { Character } from 'src/models/character.model';
 import { CharacterFilter } from 'src/models/filter.model';
 import {
   distinctUntilChanged,
   takeUntil,
   switchMap,
-  tap,
   filter,
   map,
   withLatestFrom,
+  catchError,
+  skip,
 } from 'rxjs/operators';
 import { RickAndMortyService } from './rickandmorty.service';
+
+const emptyData = {
+  results: [],
+  info: {
+    next: null,
+  },
+};
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -32,38 +41,46 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private rickAndMortyService: RickAndMortyService) {}
 
   ngOnInit() {
+    this.loadNext$
+      .pipe(
+        filter(url => !!url),
+        switchMap(url =>
+          this.rickAndMortyService.getNextPage(url).pipe(
+            catchError(_ => of(emptyData)),
+            takeUntil(this.filter$.pipe(skip(1))),
+            withLatestFrom(this.items$),
+            map(([data, oldItems]: any[]) => {
+              if (oldItems) {
+                return {
+                  ...data,
+                  results: [...oldItems, ...(data.results || [])],
+                };
+              }
+              return data;
+            })
+          )
+        ),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(data => {
+        this.nextPage = data.info && data.info.next;
+        this.items$.next(data.results);
+      });
+
     this.filter$
       .pipe(
         distinctUntilChanged(),
-        tap(_ => {
-          this.nextPage = null;
-          this.loadNext$.next(null);
-        }),
-        switchMap(filters => this.loadNext$.pipe(map(url => [filters, url]))),
-        switchMap(([filters, url]: [CharacterFilter, string]) =>
-          url
-            ? this.rickAndMortyService.getNextPage(url).pipe(
-                withLatestFrom(this.items$),
-                map(([data, oldItems]: any[]) => {
-                  if (data && data.results && oldItems) {
-                    return {
-                      ...data,
-                      results: [...oldItems, ...data.results],
-                    };
-                  }
-                  return data;
-                })
-              )
-            : this.rickAndMortyService.getCharacters(filters)
+        switchMap(filters =>
+          this.rickAndMortyService
+            .getCharacters(filters)
+            .pipe(catchError(_ => of(emptyData)))
         ),
-        filter(data => !!data),
-        tap((data: any) => {
-          this.nextPage = data.info && data.info.next;
-          this.items$.next(data.results);
-        }),
         takeUntil(this.destroy$)
       )
-      .subscribe();
+      .subscribe((data: any) => {
+        this.nextPage = data.info && data.info.next;
+        this.items$.next(data.results);
+      });
   }
 
   ngOnDestroy() {
@@ -72,7 +89,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   loadMore() {
-    console.log('loadMore');
     if (this.nextPage) {
       this.loadNext$.next(this.nextPage);
     }

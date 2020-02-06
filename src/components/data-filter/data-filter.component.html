@@ -1,42 +1,75 @@
-<form>
-  <mat-form-field>
-    <input matInput placeholder="Name" [value]="data?.name" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Status</mat-label>
-    <mat-select>
-      <mat-option [value]="CharacterStatus.Alive">{{
-        CharacterStatus.Alive
-      }}</mat-option>
-      <mat-option [value]="CharacterStatus.Dead">{{
-        CharacterStatus.Dead
-      }}</mat-option>
-      <mat-option [value]="CharacterStatus.unknown">{{
-        CharacterStatus.unknown
-      }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Species" [value]="data?.species" />
-  </mat-form-field>
-  <mat-form-field>
-    <input matInput placeholder="Type" [value]="data?.type" />
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Gender</mat-label>
-    <mat-select>
-      <mat-option [value]="CharacterGender.Male">{{
-        CharacterGender.Male
-      }}</mat-option>
-      <mat-option [value]="CharacterGender.Female">{{
-        CharacterGender.Female
-      }}</mat-option>
-      <mat-option [value]="CharacterGender.Genderless">{{
-        CharacterGender.Genderless
-      }}</mat-option>
-      <mat-option [value]="CharacterGender.unknown">{{
-        CharacterGender.unknown
-      }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</form>
+<mat-form-field>
+  <input
+    matInput
+    placeholder="Name"
+    [value]="data?.name || ''"
+    (input)="nameChange($event.target.value)"
+  />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Status</mat-label>
+  <mat-select [value]="data?.status" (valueChange)="statusChange($event)">
+    <mat-option [value]="CharacterStatus.Alive">{{
+      CharacterStatus.Alive
+    }}</mat-option>
+    <mat-option [value]="CharacterStatus.Dead">{{
+      CharacterStatus.Dead
+    }}</mat-option>
+    <mat-option [value]="CharacterStatus.unknown">{{
+      CharacterStatus.unknown
+    }}</mat-option>
+  </mat-select>
+  <button
+    mat-button
+    *ngIf="data?.status"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="statusChange(null); $event.stopPropagation()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+<mat-form-field>
+  <input
+    matInput
+    placeholder="Species"
+    [value]="data?.species || ''"
+    (input)="speciesChange($event.target.value)"
+  />
+</mat-form-field>
+<mat-form-field>
+  <input
+    matInput
+    placeholder="Type"
+    [value]="data?.type || ''"
+    (input)="typeChange($event.target.value)"
+  />
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Gender</mat-label>
+  <mat-select [value]="data?.gender" (valueChange)="genderChange($event)">
+    <mat-option [value]="CharacterGender.Male">{{
+      CharacterGender.Male
+    }}</mat-option>
+    <mat-option [value]="CharacterGender.Female">{{
+      CharacterGender.Female
+    }}</mat-option>
+    <mat-option [value]="CharacterGender.Genderless">{{
+      CharacterGender.Genderless
+    }}</mat-option>
+    <mat-option [value]="CharacterGender.unknown">{{
+      CharacterGender.unknown
+    }}</mat-option>
+  </mat-select>
+  <button
+    mat-button
+    *ngIf="data?.gender"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="genderChange(null); $event.stopPropagation()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

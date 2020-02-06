@@ -6,6 +6,7 @@ import {
   MatButtonModule,
   MatInputModule,
   MatSelectModule,
+  MatIconModule,
 } from '@angular/material';
 
 @NgModule({
@@ -15,6 +16,7 @@ import {
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    MatIconModule
   ],
   declarations: [DataFilterComponent],
   exports: [DataFilterComponent],
