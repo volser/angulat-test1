@@ -1,4 +1,4 @@
-import { CharacterStatus, CharacterGender } from 'src/models/character.model';
+import { CharacterStatus, CharacterGender } from './character.model';
 
 export interface CharacterFilter {
   name: string;

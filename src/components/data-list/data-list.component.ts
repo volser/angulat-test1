@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { Character } from 'src/models/character.model';
+import { Character } from '../../models/character.model';
 
 @Component({
   selector: 'app-data-list',

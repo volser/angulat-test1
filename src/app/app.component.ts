@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
 import { BehaviorSubject, Subject, of } from 'rxjs';
-import { Character } from 'src/models/character.model';
-import { CharacterFilter } from 'src/models/filter.model';
+import { Character } from '../models/character.model';
+import { CharacterFilter } from '../models/filter.model';
 import {
   distinctUntilChanged,
   takeUntil,

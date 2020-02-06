@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CharacterFilter } from 'src/models/filter.model';
+import { CharacterFilter } from '../models/filter.model';
 
 @Injectable({
   providedIn: 'root',

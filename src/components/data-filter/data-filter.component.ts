@@ -8,8 +8,8 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { ChangeDetectionStrategy } from '@angular/core';
-import { CharacterFilter } from 'src/models/filter.model';
-import { CharacterStatus, CharacterGender, Character } from 'src/models/character.model';
+import { CharacterFilter } from '../../models/filter.model';
+import { CharacterStatus, CharacterGender } from '../../models/character.model';
 import { Subject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 
