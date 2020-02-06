@@ -11,9 +11,15 @@ export class RickAndMortyService {
   constructor(private http: HttpClient) {}
 
   getCharacters(filter?: CharacterFilter) {
-    const params = {
-      ...filter,
+    const params = {};
+    if (filter) {
+      Object.keys(filter).forEach(k => {
+        if (filter[k]) {
+          params[k] = filter[k];
+        }
+      });
     }
+
     return this.http.get(`${this.apiUrl}/character`, { params });
   }
 
