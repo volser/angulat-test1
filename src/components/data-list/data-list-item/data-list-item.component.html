@@ -1,1 +1,35 @@
-item: {{item?.id}}
+<article class="data-list-item__wrapper">
+  <div data="card header" class="data-list-item__img-wrapper">
+    <div class="card-image">
+      <img [src]="item?.image" [alt]="item?.name" />
+    </div>
+    <div class="data-list-item__title">
+      <h2 class="data-list-item__name">{{ item?.name }}</h2>
+      <p class="data-list-item__description">
+        id: {{item?.id}} - created {{item?.created}}
+      </p>
+    </div>
+  </div>
+  <div data="card info" class="data-list-item__info-wrapper">
+    <div class="data-list-item__text-wrapper">
+      <span>STATUS</span>
+      <p>{{ item?.status }}</p>
+    </div>
+    <div class="data-list-item__text-wrapper">
+      <span>SPECIES</span>
+      <p>{{ item?.species }}</p>
+    </div>
+    <div class="data-list-item__text-wrapper">
+      <span>GENDER</span>
+      <p>{{ item?.gender }}</p>
+    </div>
+    <div class="data-list-item__text-wrapper">
+      <span>ORIGIN</span>
+      <p>{{ item?.origin?.name }}</p>
+    </div>
+    <div class="data-list-item__text-wrapper">
+      <span>LAST LOCATION</span>
+      <p>{{ item?.location?.name }}</p>
+    </div>
+  </div>
+</article>

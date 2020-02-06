@@ -1,0 +1,9 @@
+$data-list: '.data-list';
+
+#{$data-list} {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1260px;
+  min-height: 40vh;
+}
