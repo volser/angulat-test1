@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { DataListModule } from 'src/components/data-list/data-list.module';
 import { DataFilterModule } from 'src/components/data-filter/data-filter.module';
 import { HttpClientModule } from '@angular/common/http';
+import { InfiniteScrollModule } from 'src/components/infinite-scroll/infinite-scroll.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     DataListModule,
-    DataFilterModule
+    DataFilterModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
